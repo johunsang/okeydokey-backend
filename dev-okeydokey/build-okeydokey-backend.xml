@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build.okeydokey.backend" default="all" basedir=".">
+	
+	
+	<property name="version"  value="1.0.0"/>
+	<property name="jar.name" value="okeydokey-backend-${version}.jar"/>
+	<property name="was.home" location="../was-runtime"/>
+	<property name="was.home.web.root" location="${was.home}\WebContent\WEB-INF\"/>
+	<property name="was.home.web.root.lib" location="${was.home}\WebContent\WEB-INF\lib\"/>
+	
+	<target name="all" >
+		<delete dir="./tempbin"/>
+		<mkdir dir="./tempbin"/>
+		<!-- compile.okeydokey.jar -->
+		<javac srcdir="src/main/java/" destdir="./tempbin" encoding="utf-8" debug="true">
+			<exclude name="**/*Test.java" />
+			<include name="**/*.java" />
+			<classpath>
+				<fileset dir="lib/" includes="*.jar" />
+			</classpath>
+		</javac>
+
+		<!-- delete.okeydokey.jar -->
+		<echo message="delete.okeydokey.jar  ==> ${jar.name}" />
+		<delete file="${jar.name}" failonerror="false" />
+
+		<!-- make.okeydokey.jar -->
+		<echo message="make.okeydokey.jar  ==> ${jar.name}" />
+		<jar destfile="${jar.name}" duplicate="add" excludes="**/Test.class">
+			<fileset dir="./tempbin" includes="org/**" >
+			</fileset>
+		</jar>
+
+		<!-- delete.okeydokey.jar -->
+		<echo message="delete.okeydokey.jar  ==> ${was.home.web.root.lib}\${jar.name}" />
+		<delete file="${was.home.web.root.lib}\okeydokey.jar" failonerror="false" />
+
+		<!-- deploy.okeydokey.jar -->
+		<echo message="copy okeydokey.jar file to lib path. == > ${was.home.web.root.lib}${jar.name}" />
+		<copy todir="${was.home.web.root.lib}" overwrite="true" verbose="true">
+			<fileset dir="./" includes="${jar.name}">
+				
+			</fileset>
+		</copy>
+		<delete dir="./tempbin"/>
+	</target>
+
+</project>
