@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d] [%-5p] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="access" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="MS949" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="File" value="/logs/okeydokey/backend/access.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="![%d] [%-5p] %m [%l]%n" />
+		</layout>
+	</appender>
+
+	<appender name="application" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="MS949" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="File" value="/logs/okeydokey/backend/application.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="![%d] [%-5p] %m [%l]%n" />
+		</layout>
+	</appender>
+
+	<appender name="bizerror" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="MS949" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="File" value="/logs/okeydokey/backend/bizerror.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="![%d] [%-5p] %m [%l]%n" />
+		</layout>
+	</appender>
+
+	<appender name="biz" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="encoding" value="MS949" />
+		<param name="DatePattern" value="'.'yyyyMMdd" />
+		<param name="File" value="/logs/okeydokey/backend/biz.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="![%d] [%-5p] %m [%l]%n" />
+		</layout>
+	</appender>
+
+	<category name="access">
+		<priority value="debug" />
+		<appender-ref ref="access" />
+	</category>
+
+	<category name="application">
+		<priority value="debug" />
+		<appender-ref ref="application" />
+	</category>
+
+	<category name="bizerror">
+		<priority value="debug" />
+		<appender-ref ref="bizerror" />
+	</category>
+
+	<category name="biz">
+		<priority value="debug" />
+		<appender-ref ref="biz" />
+	</category>
+
+	<category name="console">
+		<priority value="info" />
+		<appender-ref ref="console" />
+	</category>
+
+	<root>
+		<level value="off" />
+	</root>
+
+</log4j:configuration>
