@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build.biz" default="all" basedir=".">
+
+	<property name="was.home" location="../was-runtime"/>
+	<property name="was.home.web.root" location="${was.home}\WebContent\WEB-INF"/>
+	<property name="was.home.web.root.lib" location="${was.home}\WebContent\WEB-INF\lib"/>
+	<property name="was.home.web.root.classes" location="${was.home.web.root}\classes"/>
+	<property name="was.home.web.root.bizid" location="${was.home}\WebContent\WEB-INF\bizId"/>
+	<property name="was.home.web.root.config" location="${was.home}\WebContent\WEB-INF\config"/>
+
+	<target name="all">
+		<echo message=" WAS Home  ==> ${was.home}" />
+		<antcall target="compile.sync.classes" />
+		<antcall target="copy.log4j" />
+		<antcall target="sync.resource.properties" />
+	</target>
+
+	<target name="compile.sync.classes">
+		<delete dir="./tempbin" />
+		<mkdir dir="./tempbin" />
+		<echo message="Compile classes.." />
+		<javac srcdir="src/" destdir="./tempbin" encoding="utf-8"  debug="true" >
+			<include name="**/*.java" />
+			<exclude name="**/test/**/*.java" />
+			<classpath>
+				<fileset dir="${was.home.web.root.lib}" includes="*.jar" />
+			</classpath>
+		</javac>
+		<echo message="Sync classes.." />
+		<sync todir="${was.home.web.root.classes}" overwrite="true" verbose="true">
+			<fileset dir="./tempbin" defaultexcludes="true">
+				<include name="**/*" />
+			</fileset>
+		</sync>
+		<delete dir="./tempbin" />
+	</target>
+
+	<target name="copy.log4j">
+		<echo message="Copy log4j.." />
+		<copy todir="${was.home.web.root.classes}" overwrite="true" verbose="true">
+			<fileset dir="src/" defaultexcludes="true">
+				<include name="log4j.xml" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="sync.resource.properties">
+		<echo message="Sync config properties.." />
+		<sync todir="${was.home.web.root.config}" overwrite="true" verbose="true">
+			<fileset dir="config/" defaultexcludes="true">
+				<include name="**/*.properties" />
+			</fileset>
+		</sync>
+	</target>
+</project>
