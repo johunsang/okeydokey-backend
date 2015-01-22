@@ -20,7 +20,7 @@ public class BizException extends BaseException {
 	public BizException(Throwable throwable) {
 		super(throwable);
 	}
-	
+
 	/**
 	 * Throw BizException
 	 * 

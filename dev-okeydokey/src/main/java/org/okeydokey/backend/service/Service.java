@@ -99,9 +99,10 @@ public class Service {
 			throw new BizException(e);
 		} finally {
 			try {
-				// finallyExecute
+				// executeFinally
 				((AbsBiz) object).executeFinally(context);
 			} catch (Exception e) {
+				throw new BizException(e);
 			}
 		}
 
