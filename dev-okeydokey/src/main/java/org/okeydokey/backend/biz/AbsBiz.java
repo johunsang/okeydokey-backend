@@ -1,12 +1,14 @@
 package org.okeydokey.backend.biz;
 
-import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import org.okeydokey.backend.consts.AppConstants;
 import org.okeydokey.backend.context.ApplicationContext;
 import org.okeydokey.backend.context.IApplicationContext;
 import org.okeydokey.backend.context.IOkeyDokeyContext;
 import org.okeydokey.backend.service.Service;
+import org.okeydokey.backend.utils.PropertyLoader;
 import org.okeydokey.backend.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,81 @@ public abstract class AbsBiz implements IBiz {
 	 */
 	public AbsBiz() {
 		BIZ_LOG = LoggerFactory.getLogger("biz");
+	}
+
+	/**
+	 * Get String value of config properties
+	 * 
+	 * @param key
+	 * @return String value of config properties
+	 */
+	public static String getConfig(String key) {
+		return PropertyLoader.getPropertyInstance().getConfig(key);
+	}
+
+	/**
+	 * Get int value of config properties
+	 * 
+	 * @param key
+	 * @return int value of config properties
+	 */
+	public static int getIntConfig(String key) {
+		return PropertyLoader.getPropertyInstance().getIntConfig(key);
+	}
+
+	/**
+	 * Get String value of code properties
+	 * 
+	 * @param code
+	 * @return String value of code properties
+	 */
+	public static String getCode(String code) {
+		return PropertyLoader.getPropertyInstance().getCode(code);
+	}
+
+	/**
+	 * Get String value of message properties
+	 * 
+	 * @param id
+	 * @return String value of message properties
+	 */
+	public static String getMessage(String id) {
+		return PropertyLoader.getPropertyInstance().getMessage(id);
+	}
+
+	/**
+	 * Get String value of okeydokey properties
+	 * 
+	 * @param id
+	 * @return String value of okeydokey properties
+	 */
+	public static String getOkeydokey(String id) {
+		return PropertyLoader.getPropertyInstance().getOkeydokey(id);
+	}
+
+	/**
+	 * Get int value of okeydokey properties
+	 * 
+	 * @param id
+	 * @return int value of okeydokey properties
+	 */
+	public static int getIntOkeydokey(String id) {
+		return PropertyLoader.getPropertyInstance().getIntOkeydokey(id);
+	}
+
+	/**
+	 * Return String of exception stack
+	 * 
+	 * @param th
+	 * @return String of exception stack
+	 */
+	public static String toExceptionString(Throwable th) {
+		if (th == null)
+			return "";
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		th.printStackTrace(pw);
+		return sw.toString();
 	}
 
 	/**

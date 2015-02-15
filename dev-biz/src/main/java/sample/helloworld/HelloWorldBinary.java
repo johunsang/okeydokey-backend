@@ -6,7 +6,6 @@ import org.okeydokey.backend.biz.AbsBiz;
 import org.okeydokey.backend.biz.Biz;
 import org.okeydokey.backend.context.IOkeyDokeyContext;
 import org.okeydokey.backend.exception.BizException;
-import org.okeydokey.backend.utils.BaseUtil;
 
 @Biz(bizId = "HelloWorldBinary")
 public class HelloWorldBinary extends AbsBiz {
@@ -32,7 +31,7 @@ public class HelloWorldBinary extends AbsBiz {
 			context.setResponseByteBuffer(outMessageByte);
 
 		} catch (Exception e) {
-			throw new BizException(BaseUtil.getMessage("ER001"), e);
+			throw new BizException(getMessage("ER001"), e);
 		}
 	}
 

@@ -7,7 +7,6 @@ import org.okeydokey.backend.biz.AbsBiz;
 import org.okeydokey.backend.biz.Biz;
 import org.okeydokey.backend.context.IOkeyDokeyContext;
 import org.okeydokey.backend.exception.BizException;
-import org.okeydokey.backend.utils.BaseUtil;
 
 import com.google.gson.Gson;
 
@@ -48,7 +47,7 @@ public class HelloWorldJson extends AbsBiz {
 			context.setResponseTextString(new Gson().toJson(resultMap));
 
 		} catch (Exception e) {
-			throw new BizException(BaseUtil.getMessage("ER001"), e);
+			throw new BizException(getMessage("ER001"), e);
 		}
 	}
 
@@ -58,7 +57,7 @@ public class HelloWorldJson extends AbsBiz {
 		if (context.isBizExceptionThrown()) {
 			// Make return error message
 			Map<String, Object> resultMap = new HashMap<String, Object>();
-			resultMap.put("error", BaseUtil.toExceptionString(context.getBizException()));
+			resultMap.put("error", toExceptionString(context.getBizException()));
 			context.setResponseTextString(new Gson().toJson(resultMap));
 
 		}
