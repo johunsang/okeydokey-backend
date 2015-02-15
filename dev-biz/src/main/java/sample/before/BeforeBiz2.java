@@ -4,7 +4,6 @@ import org.okeydokey.backend.biz.AbsBiz;
 import org.okeydokey.backend.biz.BeforeBiz;
 import org.okeydokey.backend.context.IOkeyDokeyContext;
 import org.okeydokey.backend.exception.BizException;
-import org.okeydokey.backend.utils.BaseUtil;
 
 @BeforeBiz(seq = 2)
 public class BeforeBiz2 extends AbsBiz {
@@ -15,7 +14,7 @@ public class BeforeBiz2 extends AbsBiz {
 		try {
 			BIZ_LOG.info("This class will be executed always before biz class >> 2");
 		} catch (Exception e) {
-			throw new BizException(BaseUtil.getMessage("ER001"), e);
+			throw new BizException(getMessage("ER001"), e);
 		}
 	}
 
